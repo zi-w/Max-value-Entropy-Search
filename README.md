@@ -18,8 +18,8 @@ In test-functions/, we provide some functionals one can use to test Bayesian opt
 
 ## System requirement
 We tested our code with MATLAB R2015b on Ubuntu 14.04 LTS (64-bit) and Mac OS X (64-bit). We developed our code building upon the MATLAB code for basic Gaussian process functionals from predictive entropy search (Hernandez-Lobato et al., 2014), which is developed upon GPstuff (Vanhatalo et al., 2013). To run the example code in example.m, first make sure you installed the GNU Scientific Library ([GSL](http://www.gnu.org/software/gsl/)). On ubuntu, you can install GSL by 
-'''sudo apt-get install libgsl0-dev
-'''
+```sudo apt-get install libgsl0-dev
+```
 
 To run Box2D related code in test-functions/robot-pushing/, please install [Pybox2d](https://github.com/pybox2d/pybox2d).
 
