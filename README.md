@@ -17,10 +17,16 @@ In test-functions/, we provide some functionals one can use to test Bayesian opt
 4. Tuning the walking speed of a planar bipedal robot
 
 ## System requirement
-We tested our code with MATLAB R2015b on Ubuntu 14.04 LTS (64-bit) and Mac OS X (64-bit). We developed our code building upon the MATLAB code for basic Gaussian process functionals from predictive entropy search (Hernandez-Lobato et al., 2014), which is developed upon GPstuff (Vanhatalo et al., 2013). To run the example code in example.m, first make sure you installed the GNU Scientific Library ([GSL](http://www.gnu.org/software/gsl/)). On ubuntu, you can install GSL by 
+We tested our code with MATLAB R2015b on Ubuntu 14.04 LTS (64-bit). We developed our code building upon the MATLAB code for basic Gaussian process functionals from predictive entropy search (Hernandez-Lobato et al., 2014), which is developed upon GPstuff (Vanhatalo et al., 2013). To run the example code in example.m, first make sure you installed the GNU Scientific Library ([GSL](http://www.gnu.org/software/gsl/)). On ubuntu, you can install GSL by 
 
 ```
 sudo apt-get install libgsl0-dev
+```
+
+In MATLAB command line, you can mex the c files, for example, by
+
+```
+mex chol2invchol.c -lgsl
 ```
 
 To run Box2D related code in test-functions/robot-pushing/, please install [Pybox2d](https://github.com/pybox2d/pybox2d).
@@ -37,4 +43,3 @@ To run Box2D related code in test-functions/robot-pushing/, please install [Pybo
 * Hernández-Lobato, José Miguel, Hoffman, Matthew W, and Ghahramani, Zoubin. Predictive entropy search for efficient global optimization of black-box functions. In Advances in Neural Information Processing Systems (NIPS), 2014. https://bitbucket.org/jmh233/codepesnips2014
 * Hennig, Philipp and Schuler, Christian J. Entropy search for information-efficient global optimization. Journal of Machine Learning Research, 13:1809–1837, 2012. http://www.probabilistic-optimization.org/Global.html
 * Jarno Vanhatalo, Jaakko Riihimäki, Jouni Hartikainen, Pasi Jylänki, Ville Tolvanen, Aki Vehtari. GPstuff: Bayesian Modeling with Gaussian Processes. Journal of Machine Learning Research, 14(Apr):1175-1179, 2013.
-* 
