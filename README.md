@@ -5,6 +5,8 @@ This is the MATLAB code repository associated with the paper [_Max-value Entropy
 
 We developed our code building upon some basic Gaussian process functionals from predictive entropy search (Hernandez-Lobato et al., 2014), which was developed upon GPstuff (Vanhatalo et al., 2013). 
 
+If you have any questions, please email me at ziw 'at' mit.edu, or create an issue [here](https://github.com/zi-w/Max-value-Entropy-Search/issues/new).
+
 ## System Requirement
 We tested our code with MATLAB R2015b on Ubuntu 14.04 LTS (64-bit). Please make sure you installed the GNU Scientific Library ([GSL](http://www.gnu.org/software/gsl/)). On Ubuntu, you can install GSL by 
 
