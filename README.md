@@ -65,7 +65,7 @@ Please cite our work if you would like to use the code.
 @article{wang2017maxvalue,
     author = {Wang, Zi and Jegelka, Stefanie},
     title = {Max-value Entropy Search for Efficient Bayesian Optimization},
-    journal = {arXiv preprint arXiv:1703.01968}
+    journal = {arXiv preprint arXiv:1703.01968},
     year = {2017},
 }
 ```
