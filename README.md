@@ -49,7 +49,7 @@ For high dimensional Bayesian optimization with additive Gausian processes, we i
 3. Add-EST by Wang & Jegelka, 2017;
 4. Add-GP-UCB by Kandasamy et al., 2015.
 
-
+Our strategy for learning the Gaussian process additive structure is based on Wang et al., 2017.
 ## Example functionals for optimization
 In test-functions/, we provide some functionals one can use to test Bayesian optimization algorithms. 
 
@@ -82,3 +82,4 @@ Please cite our work if you would like to use the code.
 * Hennig, Philipp and Schuler, Christian J. Entropy search for information-efficient global optimization. Journal of Machine Learning Research, 13:1809–1837, 2012. http://www.probabilistic-optimization.org/Global.html
 * Jarno Vanhatalo, Jaakko Riihimäki, Jouni Hartikainen, Pasi Jylänki, Ville Tolvanen, Aki Vehtari. GPstuff: Bayesian Modeling with Gaussian Processes. Journal of Machine Learning Research, 14(Apr):1175-1179, 2013.
 * Kandasamy, Kirthevasan, Schneider, Jeff, and Poczos, Barnabas. High dimensional Bayesian optimisation and bandits via additive models. In International Conference on Machine Learning (ICML), 2015.
+* Wang, Zi, Li, Chengtao, Jegelka, Stefanie, and Kohli, Pushmeet. Batched High-dimensional Bayesian Optimization via Structural Kernel Learning. arXiv preprint arXiv:1703.01973, 2017.
