@@ -29,6 +29,7 @@ add_gpopt.m is the function for Bayesian optimization with additive Gaussian pro
 
 ## Method Options
 In addition to the proposed Max-value Entropy Search method, we also provide several other popular Bayesian optimization methods for the convenience of other researchers. The following is a full list of Bayesian optimization methods that are implemented in this repository.
+
 1. Max-value Entropy Search with Gumbel sampling (MES-G) by Wang & Jegelka, 2017;
 2. Max-value Entropy Search with random features (MES-R) by Wang & Jegelka, 2017;
 3. Optimization as estimation (EST) by Wang et al., 2016. 
@@ -40,6 +41,7 @@ In addition to the proposed Max-value Entropy Search method, we also provide sev
 In the paper, we also used the open sourced code from [entropy search](http://www.probabilistic-optimization.org/Global.html) (Hennig & Schuler, 2012) and [predictive entropy search](https://bitbucket.org/jmh233/codepesnips2014) (Hernández-Lobato et al., 2014) to compare with our method.
 
 For high dimensional Bayesian optimization with additive Gausian processes, we implemented
+
 1. Add-MES-G by Wang & Jegelka, 2017;
 2. Add-MES-R by Wang & Jegelka, 2017;
 3. Add-EST by Wang & Jegelka, 2017;
