@@ -59,13 +59,14 @@ In test-functions/, we provide some functionals one can use to test Bayesian opt
 
 ## Approximated BibTex Entry
 Please cite our work if you would like to use the code.
+```
 @article{wang2017maxvalue,
     author = {Wang, Zi and Jegelka, Stefanie},
     title = {Max-value Entropy Search for Efficient Bayesian Optimization},
     journal = {arXiv preprint arXiv:1703.01968}
     year = {2017},
 }
-
+```
 ## References
 * Wang, Zi and Jegelka, Stefanie. Max-value Entropy Search for Efficient Bayesian Optimization. arXiv preprint arXiv:1703.01968, 2017.
 * Auer, Peter. Using confidence bounds for exploitationexploration tradeoffs. Journal of Machine Learning Research, 3:397–422, 2002.
