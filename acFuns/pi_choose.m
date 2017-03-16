@@ -1,0 +1,13 @@
+function optimum = pi_choose(xx, yy, KernelMatrixInv, guesses, sigma0, sigma, l, xmin, xmax)
+% This function returns the next evaluation point using PI.
+% xx, yy are the current observations.
+% KernelMatrixInv is the gram maxtrix inverse under different GP
+% hyper-parameters.
+% guesses are the inferred points to recommend to evaluate.
+% sigma0, sigma, l are the hyper-parameters of the Gaussian kernel.
+% xmin, xmax are the lower and upper bounds for the search space.
+
+% Define the acquisition function (and gradient) of PI.
+acfun = @(x) evaluatePI(x, xx, yy, KernelMatrixInv, l, sigma, sigma0);
+% Optimize the acquisition function.
+optimum = globalMaximization(acfun, xmin, xmax, guesses);
