@@ -2,6 +2,7 @@ function [f, g] = evaluatePI(x, xx, yy, KernelMatrixInv, l, sigma, sigma0)
 % This function computes the acquisition function value f and gradient g at
 % the queried point x using PI given sampled function values maxes, and
 % observations Xsamples (size T x d), Ysamples (size T x 1).
+
 if nargout == 2
     f = 0;
     g = 0;

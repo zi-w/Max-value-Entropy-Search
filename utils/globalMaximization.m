@@ -11,6 +11,9 @@ function [ optimum, fval] = globalMaximization(target, xmin, xmax, guesses, useG
 try
     % Sample a random set of inputs and find the best one to initialize
     % fmincon for optimization
+    if nargin == 3
+        guesses = [];
+    end
     if nargin == 4
         useGradient = 1;
     end

@@ -12,7 +12,8 @@ function optimum = est_choose(nM, xx, yy, KernelMatrixInv, guesses, ...
 % Sample a set of random points in the search space.
 gridSize = 10000;
 d = size(xmin, 1);
-Xgrid = repmat(xmin', gridSize, 1) + repmat((xmax - xmin)', gridSize, 1) .* rand(gridSize, d);
+Xgrid = repmat(xmin', gridSize, 1) + repmat((xmax - xmin)', gridSize, ...
+    1) .* rand(gridSize, d);
 Xgrid = [ Xgrid ; guesses ];
 maxes = zeros(nM, 1);
 yvals = 0;

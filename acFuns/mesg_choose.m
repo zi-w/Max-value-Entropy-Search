@@ -81,6 +81,8 @@ neg_acfun = @(x) negative_wrapper(acfun, x);
 [ optimum, fval] = fmincon(neg_acfun, start, [], [], [], [], xmin, xmax, ... 
     [], optimset('MaxFunEvals', 100, 'TolX', eps, 'Display', 'off', ...
     'GradObj', 'on'));
+fval = -fval;
 if fval < maxVal
+    disp('Optimization for MES-G failed.')
     optimum = start;
 end

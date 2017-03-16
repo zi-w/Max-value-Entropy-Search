@@ -34,35 +34,36 @@ for i = 1 : nM
         Z = sqrt(2 * sigma(i) / nFeatures) * cos(W * xx' + ...
             repmat(b, 1, size(xx, 1)));
        
-        % Draw the coefficient a.
+        % Draw the coefficient theta.
         noise = randn(nFeatures, 1);
         if (size(xx, 1) < nFeatures)
-            % We adopt the formula $a \sim \N(Z(Z'Z + \sigma^2 I)^{-1} y, 
+            % We adopt the formula $theta \sim \N(Z(Z'Z + \sigma^2 I)^{-1} y, 
             % I-Z(Z'Z + \sigma^2 I)Z')$.
             Sigma = Z' * Z + sigma0(i) * eye(size(xx, 1));
             mu = Z*chol2invchol(Sigma)*yy;
             [U, D] = eig(Sigma);
             D = diag(D);
             R = (sqrt(D) .* (sqrt(D) + sqrt(sigma0(i)))).^-1;
-            a = noise - (Z * (U * (R .* (U' * (Z' * noise))))) + mu;
+            theta = noise - (Z * (U * (R .* (U' * (Z' * noise))))) + mu;
         else
-            % $a \sim \N((ZZ'/\sigma^2 + I)^{-1} Z y / \sigma^2,
+            % $theta \sim \N((ZZ'/\sigma^2 + I)^{-1} Z y / \sigma^2,
             % (ZZ'/\sigma^2 + I)^{-1})$.
-            Sigma = chol2invchol(cross(Z, Z') / sigma0(i) + eye(nFeatures));
+            Sigma = chol2invchol(Z*Z' / sigma0(i) + eye(nFeatures));
             mu = Sigma * Z * yy / sigma0(i);
-            a = mu + noise * chol(Sigma);
+            theta = mu + noise * chol(Sigma);
             
         end
         
         % Obtain a function sampled from the posterior GP.
         
-        targetVector = @(x) (a' * sqrt(2 * sigma(i) / nFeatures) * ...
+        targetVector = @(x) (theta' * sqrt(2 * sigma(i) / nFeatures) * ...
             cos(W * x' + repmat(b, 1, size(x, 1))))';
-        targetVectorGradient = @(x) a' * -sqrt(2 * sigma(i) / ...
+        targetVectorGradient = @(x) theta' * -sqrt(2 * sigma(i) / ...
             nFeatures) * (repmat(sin(W * x' + b), 1, d) .* W);
         
         target = @(x) wrap_target(targetVector, targetVectorGradient, x);
         
+        % Optimize the function.
         [~, sample]= globalMaximization(target, xmin, xmax, xx);
         
         samples(i, j) = sample;

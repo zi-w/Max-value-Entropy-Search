@@ -5,18 +5,45 @@
 % Functions, In NIPS, 2014.
 % https://bitbucket.org/jmh233/codepesnips2014
 function results = gpopt(objective, xmin, xmax, T, initx, inity, options)
-% xmin xmax are column vectors
+% This function maximizes the function objective and returns results as a
+% cell of size 7, including the inferred argmax points (guesses),
+% the function values of the inferred argmax points (guessvals), the
+% evaluated points (xx), the function values of the evaluated points
+% (yy), the runtime to choose the points (choose_time) and extra time of
+% inferring the argmax (extra_time).
+% objective is a function handle;
+% xmin is a column vector indicating the lower bound of the search space;
+% xmax is a column vector indicating the upper bound of the search space;
+% T is the number of sequential evaluations of the function;
+% initx, inity are the initialization of observed inputs and their values.
+
 if nargin <= 6
     options = struct();
 end
-if ~isfield(options, 'restart') options.restart = 0; end
+if ~isfield(options, 'restart'); options.restart = 0; end
 if ~isfield(options, 'bo_method'); options.bo_method = 'mes-g'; end
 if ~isfield(options, 'savefilenm'); options.savefilenm = []; end
 if ~isfield(options, 'noiselevel'); options.noiselevel = 0; end
-if ~isfield(options, 'nM'); options.nM = 5; else nM = 1; end
-if ~isfield(options, 'nK'); options.nK = 1; end
-if ~isfield(options, 'nFeatures'); options.nFeatures = 1000; end
+if isfield(options, 'nM'); nM = options.nM; else nM = 10; end
+if isfield(options, 'nK'); nK = options.nK; else nK = 1; end
+if isfield(options, 'nFeatures')
+    nFeatures = options.nFeatures;
+else
+    nFeatures = 1000;
+end
 if ~isfield(options, 'seed'); options.seed = 1000; end
+if ~isfield(options, 'learn_interval'); options.learn_interval = 10; end
+% test if the hyper parameters are fixed and provided.
+if ~isfield(options, 'isfix')
+    options.isfix = 0;
+else
+    if ~ (isfield(options, 'l') && isfield(options, 'sigma') ...
+            && isfield(options, 'sigma0'))
+        options.isfix = 0;
+    else
+        nM = 1;
+    end
+end
 % Set random seed
 s = RandStream('mcg16807','Seed', options.seed);
 RandStream.setGlobalStream(s);
@@ -55,7 +82,7 @@ end
 
 % We sample from the posterior distribution of the hyper-parameters
 
-[ l, sigma, sigma0 ] = sampleHypers(xx, yy, nM, fixhyp);
+[ l, sigma, sigma0 ] = sampleHypers(xx, yy, nM, options);
 KernelMatrixInv = cell(1, nM);
 for j = 1 : nM
     KernelMatrix = computeKmm(xx, l(j,:)', sigma(j), sigma0(j));
@@ -85,7 +112,7 @@ for t = tstart+1 : T
             length(xmin)*max(xmax-xmin)*(log(4*length(xmin)/0.01))^0.5))^0.5;
         optimum = ucb_choose(xx, yy, KernelMatrixInv, guesses, ...
             sigma0, sigma, l, xmin, xmax, alpha, beta);
-    elseif strcmp(options.bo_method, 'est')
+    elseif strcmp(options.bo_method, 'EST')
         optimum = est_choose(nM, xx, yy, KernelMatrixInv, guesses, ...
             sigma0, sigma, l, xmin, xmax);
     end
@@ -95,11 +122,11 @@ for t = tstart+1 : T
     
     yy = [ yy ; objective(optimum)+ randn(1)*noiselevel];
     
-    if mod(t, fixhyp.learn_interval) == 0
+    if mod(t, options.learn_interval) == 0
         % We sample from the posterior distribution of the hyper-parameters
-        [ l, sigma, sigma0 ] = sampleHypers(xx, yy, nM, fixhyp);
+        [ l, sigma, sigma0 ] = sampleHypers(xx, yy, nM, options);
     end
-    % We update the kernel matrix on the samples
+    % We update the inverse of the gram matrix on the samples
     
     KernelMatrixInv = cell(1, nM);
     for j = 1 : nM

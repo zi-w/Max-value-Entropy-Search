@@ -1,11 +1,11 @@
-function [f, g] = evaluateEI(x, xx, yy, KernelMatrixInv, l, sigma, sigma0)
+function [f, g] = evaluateEI(x, xx, yy, KernelMatrixInv, l, sigma, sigma0, m0)
 % This function computes the acquisition function value f and gradient g at
 % the queried point x using EI given sampled function values maxes, and
 % observations Xsamples (size T x d), Ysamples (size T x 1).
+if nargin <= 7; m0 = max(yy); end
 if nargout == 2
     f = 0;
     g = 0;
-    m0 = max(yy);
     for i = 1 :  size(KernelMatrixInv, 2)
         % Compute the posterior mean/variance predictions and gradients.
         [meanVector, varVector, meangrad, vargrad] = mean_var(x, xx, yy, ...
@@ -27,7 +27,6 @@ if nargout == 2
     g = g / size(KernelMatrixInv, 2);
 else
     f = 0;
-    m0 = max(Ysamples);
     for i = 1 :  size(KernelMatrixInv, 2)
         % Compute the posterior mean/variance predictions.
         [meanVector, varVector] = mean_var(x, xx, yy, KernelMatrixInv{i}, l(i,:), sigma(i), sigma0(i));
