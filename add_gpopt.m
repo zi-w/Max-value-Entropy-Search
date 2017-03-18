@@ -41,21 +41,17 @@ if options.restart == 0
     end
     xx = initx;
     yy = inity;
-    guesses = initx;
-    guessvals = inity;
     choose_time = []; % elapsed time to choose where to evaluate
     extra_time = []; % elapsed time to optimize mean function, hyper-parameters
     tstart = 0;
 else
     restart_file = load(options.savefilenm);
-    guesses      =  restart_file.results{1};
-    guessvals    =  restart_file.results{2};
-    xx           =  restart_file.results{3};
-    yy           =  restart_file.results{4};
-    choose_time  =  restart_file.results{5};
-    extra_time   =  restart_file.results{6};
-    t            =  restart_file.results{7};
-    z            =  restart_file.results{8};
+    xx           =  restart_file.results{1};
+    yy           =  restart_file.results{2};
+    choose_time  =  restart_file.results{3};
+    extra_time   =  restart_file.results{4};
+    t            =  restart_file.results{5};
+    z            =  restart_file.results{6};
     tstart = t;
     if tstart >= T
         return
@@ -129,14 +125,12 @@ for t = tstart+1 : T
     disp([num2str(t) ': ' 'val=' num2str(yy(end,:))])
     % save result every a few iterations
     if ~isempty(options.savefilenm) && mod(t,10) == 0
-        results{1} = guesses;
-        results{2} = guessvals;
-        results{3} = xx;
-        results{4} = yy;
-        results{5} = choose_time;
-        results{6} = extra_time;
-        results{7} = t;
-        results{8} = z;
+        results{1} = xx;
+        results{2} = yy;
+        results{3} = choose_time;
+        results{4} = extra_time;
+        results{5} = t;
+        results{6} = z;
         save(savefilenm, 'results');
     end
 end

@@ -93,12 +93,13 @@ minnlz_nocon = realmax;
 %% start gibbs iteration
 for i = 1:N_gibbs
     for d = 1:dx
-        % calculate the categorical distribution
+        
         if i < gibbs_iter % in the first two iterations, no limit
             log_prob = zeros(1, n_partition);
             nlz = zeros(1, n_partition);
             all_cat = unique(z);
             other_cat = 1:n_partition;
+            % calculate the categorical distribution
             for a = all_cat
                 other_cat = other_cat(other_cat ~= a);
                 z(d) = a;
