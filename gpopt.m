@@ -5,8 +5,8 @@
 % Functions, In NIPS, 2014.
 % https://bitbucket.org/jmh233/codepesnips2014
 function results = gpopt(objective, xmin, xmax, T, initx, inity, options)
-% This function maximizes the function objective and returns results as a
-% cell of size 7, including the inferred argmax points (guesses),
+% This function maximizes the function objective via BO and returns results 
+% as a cell of size 7, including the inferred argmax points (guesses),
 % the function values of the inferred argmax points (guessvals), the
 % evaluated points (xx), the function values of the evaluated points
 % (yy), the runtime to choose the points (choose_time) and extra time of
@@ -32,19 +32,9 @@ if isfield(options, 'nFeatures')
 else
     nFeatures = 1000;
 end
-if ~isfield(options, 'seed'); options.seed = 10000; end
+if ~isfield(options, 'seed'); options.seed = 42; end
 if ~isfield(options, 'learn_interval'); options.learn_interval = 10; end
-% test if the hyper parameters are fixed and provided.
-if ~isfield(options, 'isfix')
-    options.isfix = 0;
-else
-    if ~ (isfield(options, 'l') && isfield(options, 'sigma') ...
-            && isfield(options, 'sigma0'))
-        options.isfix = 0;
-    else
-        nM = 1;
-    end
-end
+
 % Set random seed
 s = RandStream('mcg16807','Seed', options.seed);
 RandStream.setGlobalStream(s);

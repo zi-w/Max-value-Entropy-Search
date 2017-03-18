@@ -58,12 +58,12 @@ for i = 1:nM
         assert(beta > 0);
         % Sample from the Gumbel distribution.
         maxes(i,:) = - log( -log(rand(1, nK)) ) .* beta + alpha;
-        maxes(i, maxes(i,:) < left + 5*sigma0(i)) = left + 5*sigma0(i);
+        maxes(i, maxes(i,:) < left + 5*sqrt(sigma0(i))) = left + 5*sqrt(sigma0(i));
     else
         % In rare cases, the GP shows that with probability at least 0.25,
         % the function upper bound is smaller than the max of
         % the observations. We manually set the samples maxes to be
-        maxes(i,:) = left + 5*sigma0(i);
+        maxes(i,:) = left + 5*sqrt(sigma0(i));
     end
     % Compute the acquisition function values on Xgrid.
     gamma = (repmat(maxes(i,:),[sx 1]) - repmat(meanVector, [1, nK])) ...

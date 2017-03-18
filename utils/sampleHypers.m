@@ -5,7 +5,7 @@
 % https://bitbucket.org/jmh233/codepesnips2014
 function [ l, sigma, sigma0 ] = sampleHypers(Xsamples, Ysamples, nSamples, fixhyp)
 % Check if the hyper parameters are fixed
-if fixhyp.isfix == 1
+if isfield(fixhyp, 'l') && isfield(fixhyp, 'sigma') && isfield(fixhyp, 'sigma0')
     % Fix the hyper parameters
     l = repmat(fixhyp.l, [nSamples, 1]);
     sigma = ones(nSamples,1)*fixhyp.sigma;

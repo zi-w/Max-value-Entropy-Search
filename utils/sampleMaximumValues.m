@@ -71,9 +71,8 @@ for i = 1 : nM
         % If the optimization failed, we manually set the
         % sample to be max(yy) + epsilon to make sure our samples are
         % upperbounds on the underlying function.
-        if sample < max(yy) + 5*sigma0(i)
-            disp('maximum value failed')
-            samples(i, j) = max(yy) + 5*sigma0(i);
+        if sample < max(yy) + 5*sqrt(sigma0(i))
+            samples(i, j) = max(yy) + 5*sqrt(sigma0(i));
         end
     end
 end

@@ -1,19 +1,32 @@
 % Author: Zi Wang
 % See also: gpopt.m
 function results = add_gpopt(objective, xmin, xmax, T, initx, inity, options)
-% xmin xmax are column vectors
+% This function maximizes the function objective using BO with add-GP and 
+% returns results as a cell of size 7, including the inferred argmax points 
+% (guesses),the function values of the inferred argmax points (guessvals), the
+% evaluated points (xx), the function values of the evaluated points
+% (yy), the runtime to choose the points (choose_time) and extra time of
+% inferring the argmax (extra_time).
+% objective is a function handle;
+% xmin is a column vector indicating the lower bound of the search space;
+% xmax is a column vector indicating the upper bound of the search space;
+% T is the number of sequential evaluations of the function;
+% initx, inity are the initialization of observed inputs and their values.
+
 if nargin <= 6
     options = struct();
 end
 if ~isfield(options, 'restart') options.restart = 0; end
 if ~isfield(options, 'bo_method'); options.bo_method = 'mes-g'; end
 if ~isfield(options, 'savefilenm'); options.savefilenm = []; end
+% When testing synthetic functions, one can add noise to the output.
 if ~isfield(options, 'noiselevel'); options.noiselevel = 0; end
 if ~isfield(options, 'nK'); options.nK = 1; end
-if ~isfield(options, 'nFeatures'); options.nFeatures = 1000; end
-if ~isfield(options, 'seed'); options.seed = 1000; end
+if ~isfield(options, 'nFeatures'); options.nFeatures = 10000; end
+if ~isfield(options, 'seed'); options.seed = 42; end
 % Set random seed
 s = RandStream('mcg16807','Seed', options.seed);
+if ~isfield(options, 'learn_interval'); options.learn_interval = 10; end
 RandStream.setGlobalStream(s);
 
 % Set options.restart = 1 to use the saved results and run more iterations
@@ -56,26 +69,22 @@ for t = tstart+1 : T
     tic
     if mod(t, fixhyp.learn_interval) == 1
         % learn structure
-        [z, hyp, minnlz ] = sampleStructPriors(xx, yy, nM, fixhyp);
-        if fixhyp.usediscrete
-            get_grid(z, fixhyp);
-        end
+        [z, hyp, minnlz ] = sampleStructPriors(xx, yy, fixhyp);
         fixhyp.z = z;
     end
     extra_time = [extra_time; toc];
     
     tic
     % Calculate and inverse the gram matrix
-    KernelMatrixInv = cell(1, nM);
-    for j = 1 : nM
-        KernelMatrix = compute_gram(xx, hyp, j, z);
-        KernelMatrixInv{ j } = chol2invchol(KernelMatrix);
-    end
+    KernelMatrixInv = cell(1);
+    KernelMatrix = compute_gram(xx, hyp, 1, z);
+    KernelMatrixInv{1} = chol2invchol(KernelMatrix);
+
     all_cat = unique(z);
     if strcmp(bo_method, 'MES-R')
         % compute the max-values maxes of size nZ x nK
-        nFeatures = min(500, ceil(10000/length(all_cat)));
-        maxes = add_sampleMaximumValues(1, nK, xx, yy, hyp.sigma0, hyp.sigma, hyp.l, xmin, xmax, nFeatures, z, all_cat);
+        subnFeatures = ceil(optioins.nFeatures/length(all_cat));
+        maxes = add_sampleMaximumValues(1, nK, xx, yy, hyp.sigma0, hyp.sigma, hyp.l, xmin, xmax, subnFeatures, z, all_cat);
     end
     xnext = zeros(1, size(xx,2));
     % Start optimization group by group
@@ -117,7 +126,6 @@ for t = tstart+1 : T
     xx = [ xx ; xnext ];
     yy = [ yy ; objective(xnext) + rand(1) * noiselevel];
     
-    disp(['elapsed choosing time is ' num2str(choose_time(end))])
     disp([num2str(t) ': ' 'val=' num2str(yy(end,:))])
     % save result every a few iterations
     if ~isempty(options.savefilenm) && mod(t,10) == 0
