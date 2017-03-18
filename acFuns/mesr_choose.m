@@ -18,4 +18,4 @@ function optimum = mesr_choose(nM, nK, xx, yy, KernelMatrixInv, ...
 % Define the acquisition function (and gradient) of MES.
 acfun = @(x) evaluateMES(x, maxes, xx, yy, KernelMatrixInv, l, sigma, sigma0);
 % Optimize the acquisition function.
-optimum = globalMaximization(acfun, xmin, xmax, guesses);
+optimum = globalMaximization(acfun, xmin, xmax, [guesses;xx]);

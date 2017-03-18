@@ -14,7 +14,7 @@ gridSize = 10000;
 d = size(xmin, 1);
 Xgrid = repmat(xmin', gridSize, 1) + repmat((xmax - xmin)', gridSize, ...
     1) .* rand(gridSize, d);
-Xgrid = [ Xgrid ; guesses ];
+Xgrid = [ Xgrid ; guesses; xx];
 maxes = zeros(nM, 1);
 yvals = 0;
 for i = 1:nM

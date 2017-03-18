@@ -10,4 +10,4 @@ function [optimum, fval] = pi_choose(xx, yy, KernelMatrixInv, sigma0, sigma, l, 
 % Define the acquisition function (and gradient) of EI.
 acfun = @(x) evaluatePI(x, xx, yy, KernelMatrixInv, l, sigma, sigma0, m0);
 % Optimize the acquisition function.
-[optimum, fval] = globalMaximization(acfun, target_gradient, xmin, xmax);
+[optimum, fval] = globalMaximization(acfun, xmin, xmax, [guesses;xx]);

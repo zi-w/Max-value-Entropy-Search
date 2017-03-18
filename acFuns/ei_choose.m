@@ -11,4 +11,4 @@ function optimum = ei_choose(xx, yy, KernelMatrixInv, guesses, sigma0, ...
 % Define the acquisition function (and gradient) of EI.
 acfun = @(x) evaluateEI(x, xx, yy, KernelMatrixInv, l, sigma, sigma0);
 % Optimize the acquisition function.
-optimum = globalMaximization(acfun, xmin, xmax, guesses);
+optimum = globalMaximization(acfun, xmin, xmax, [guesses;xx]);
