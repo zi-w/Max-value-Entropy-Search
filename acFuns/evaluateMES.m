@@ -28,7 +28,7 @@ if nargout == 2
         vargrad = repmat(vargrad, [1, nK]);
         gamma = (repmat(maxes(i,:),[sx 1]) - meanVector) ./ sigVector;
         % Compute the acquisition function of MES.
-        pdfgamma = realnormpdf(gamma);
+        pdfgamma = normpdf(gamma);
         cdfgamma = normcdf(gamma);
         f = f + sum(gamma.*pdfgamma./(2*cdfgamma) - log(cdfgamma),2);
         % Compute the gradient of the acquisition function of MES.
@@ -63,7 +63,7 @@ else
         sigVector = repmat(sigVector, [1, nK]);
         gamma = (repmat(maxes(i,:),[sx 1]) - meanVector) ./ sigVector;
         % Compute the acquisition function of MES.
-        pdfgamma = realnormpdf(gamma);
+        pdfgamma = normpdf(gamma);
         cdfgamma = normcdf(gamma);
         f = f + sum(gamma.*pdfgamma./(2*cdfgamma) - log(cdfgamma),2);
     end

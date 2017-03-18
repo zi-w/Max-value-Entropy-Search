@@ -8,7 +8,7 @@ function [ optimum, fval] = globalMaximization(target, xmin, xmax, guesses, useG
 % target is a function handle returning the function value (and gradient
 % if useGradient is true).
 % target can take input of dimension nSample*d if only outputing the values.
-try
+%try
     % Sample a random set of inputs and find the best one to initialize
     % fmincon for optimization
     if nargin == 3
@@ -43,18 +43,18 @@ try
         fval = maxVal;
         optimum = start;
     end
-catch ME
-    % In rare situations, the target can return NaN for the gradient, which
-    % causes errors in fmincon.
-    % With 0.2 probability, we sample a random point; with 0.8
-    % probability, we return the best point of the random samples Xgrid.
-    disp(ME.identifier)
-    if rand < 0.8
-        optimum = start;
-        fval = maxVal;
-    else
-        optimum = Xgrid(1,:);
-        fval = y(1);
-    end
-end
+% catch ME
+%     % In rare situations, the target can return NaN for the gradient, which
+%     % causes errors in fmincon.
+%     % With 0.2 probability, we sample a random point; with 0.8
+%     % probability, we return the best point of the random samples Xgrid.
+%     disp(ME.identifier)
+%     if rand < 0.8
+%         optimum = start;
+%         fval = maxVal;
+%     else
+%         optimum = Xgrid(1,:);
+%         fval = y(1);
+%     end
+% end
 end

@@ -21,7 +21,7 @@ if nargin <= 6
     options = struct();
 end
 if ~isfield(options, 'restart'); options.restart = 0; end
-if ~isfield(options, 'bo_method'); options.bo_method = 'mes-g'; end
+if ~isfield(options, 'bo_method'); options.bo_method = 'MES-G'; end
 if ~isfield(options, 'savefilenm'); options.savefilenm = []; end
 if ~isfield(options, 'noiselevel'); options.noiselevel = 0; end
 if isfield(options, 'nM'); nM = options.nM; else nM = 10; end
@@ -31,7 +31,7 @@ if isfield(options, 'nFeatures')
 else
     nFeatures = 1000;
 end
-if ~isfield(options, 'seed'); options.seed = 1000; end
+if ~isfield(options, 'seed'); options.seed = 10000; end
 if ~isfield(options, 'learn_interval'); options.learn_interval = 10; end
 % test if the hyper parameters are fixed and provided.
 if ~isfield(options, 'isfix')
@@ -120,7 +120,7 @@ for t = tstart+1 : T
     
     xx = [ xx ; optimum ];
     
-    yy = [ yy ; objective(optimum)+ randn(1)*noiselevel];
+    yy = [ yy ; objective(optimum)+ randn(1)*options.noiselevel];
     
     if mod(t, options.learn_interval) == 0
         % We sample from the posterior distribution of the hyper-parameters
@@ -160,6 +160,6 @@ for t = tstart+1 : T
         results{5} = choose_time;
         results{6} = extra_time;
         results{7} = t;
-        save(savefilenm, 'results');
+        save(options.savefilenm, 'results');
     end
 end

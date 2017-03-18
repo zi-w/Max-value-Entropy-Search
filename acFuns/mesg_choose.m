@@ -1,6 +1,6 @@
 % Author: Zi Wang
 function optimum = mesg_choose(nM, nK, xx, yy, KernelMatrixInv, ...
-    guesses, sigma0, sigma, l, xmin, xmax, epsilon)
+    guesses, sigma0, sigma, l, xmin, xmax)
 % This function returns the next evaluation point using MES-G.
 % nM is the number of sampled GP hyper-parameter settings.
 % nK is the number of sampled maximum values.
@@ -10,8 +10,8 @@ function optimum = mesg_choose(nM, nK, xx, yy, KernelMatrixInv, ...
 % guesses are the inferred points to recommend to evaluate.
 % sigma0, sigma, l are the hyper-parameters of the Gaussian kernel.
 % xmin, xmax are the lower and upper bounds for the search space.
-% epsilon is an offset on the sampled max-value.
-if nargin <= 11; epsilon = 0.1; end
+
+
 % Sample a set of random points in the search space.
 gridSize = 10000;
 d = size(xmin, 1);
@@ -58,12 +58,13 @@ for i = 1:nM
         assert(beta > 0);
         % Sample from the Gumbel distribution.
         maxes(i,:) = - log( -log(rand(1, nK)) ) .* beta + alpha;
-        maxes(i, maxes(i,:) < left + epsilon) = epsilon;
+        maxes(i, maxes(i,:) < left + 5*sigma0(i)) = left + 5*sigma0(i);
+        keyboard
     else
         % In rare cases, the GP shows that with probability at least 0.25, 
         % the function upper bound is smaller than the max of
         % the observations. We manually set the samples maxes to be 
-        maxes(i,:) = left + epsilon;
+        maxes(i,:) = left + 5*sigma0(i);
     end
     % Compute the acquisition function values on Xgrid.
     gamma = (repmat(maxes(i,:),[sx 1]) - repmat(meanVector, [1, nK])) ...

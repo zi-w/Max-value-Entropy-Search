@@ -17,7 +17,7 @@ sudo apt-get install libgsl0-dev
 In MATLAB command line, you can mex the c files, for example, by
 
 ```
-mex chol2invchol.c -lgsl
+mex chol2invchol.c -lgsl -lblas
 ```
 
 To run Box2D related code in test-functions/robot-pushing/, please install [Pybox2d](https://github.com/pybox2d/pybox2d).

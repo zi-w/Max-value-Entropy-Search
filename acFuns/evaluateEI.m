@@ -16,7 +16,7 @@ if nargout == 2
         sigVector = sqrt(varVector);
         % Compute the EI acquisition function values f and gradients g.
         gamma = (m0 - meanVector)./sigVector;
-        pdfgamma =normpdf(gamma);
+        pdfgamma = normpdf(gamma);
         cdfgamma = normcdf(gamma);
         temp = (pdfgamma - gamma .* (1-cdfgamma));
         f = f + sigVector.*temp;
