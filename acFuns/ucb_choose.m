@@ -9,8 +9,7 @@ function optimum = ucb_choose(xx, yy, KernelMatrixInv, guesses, sigma0, ...
 % xmin, xmax are the lower and upper bounds for the search space.
 
 % Define the acquisition function (and gradient) of EI.
-acfun = @(x) evaluateUCBAc(x, xx, yy, KernelMatrixInv, l, ...
+acfun = @(x) evaluateUCB(x, xx, yy, KernelMatrixInv, l, ...
     sigma, sigma0, alpha, beta);
 % Optimize the acquisition function.
-
 optimum = globalMaximization(acfun, xmin, xmax, guesses);
