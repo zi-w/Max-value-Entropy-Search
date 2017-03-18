@@ -60,9 +60,9 @@ for i = 1:nM
         maxes(i,:) = - log( -log(rand(1, nK)) ) .* beta + alpha;
         maxes(i, maxes(i,:) < left + 5*sigma0(i)) = left + 5*sigma0(i);
     else
-        % In rare cases, the GP shows that with probability at least 0.25,
+        % In rare cases, the GP shows that with probability at least 0.25, 
         % the function upper bound is smaller than the max of
-        % the observations. We manually set the samples maxes to be
+        % the observations. We manually set the samples maxes to be 
         maxes(i,:) = left + 5*sigma0(i);
     end
     % Compute the acquisition function values on Xgrid.
@@ -78,29 +78,22 @@ start = Xgrid(maxIdx,:);
 % Optimize the acquisition function.
 acfun = @(x) evaluateMES(x, maxes, xx, yy, KernelMatrixInv, l, sigma, sigma0);
 neg_acfun = @(x) negative_wrapper(acfun, x);
-[ optimum, fval] = fmincon(neg_acfun, start, [], [], [], [], xmin, xmax, ...
+[ optimum, fval] = fmincon(neg_acfun, start, [], [], [], [], xmin, xmax, ... 
     [], optimset('MaxFunEvals', 100, 'TolX', eps, 'Display', 'off', ...
     'GradObj', 'on'));
 fval = -fval;
 if fval < maxVal
-    disp('fmincon for MES-G failed to return a value better than the initialization.')
+    disp('fmincon for MES-G failed.')
     [optimum, fval] = fminsearch(neg_acfun, start);
     fval = -fval;
     if fval < maxVal
-        disp('fminsearch for MES-G failed to return a value better than the initialization.')
+        disp('fminsearch for MES-G failed.')
         optimum = start;
     else
-        % check if optimum is in range
-        flag = 0;
-        for i = 1:length(xmin)
-            if optimum(i) < xmin(i) || optimum(i) > xmax(i)
-                flag = 1;
-                break;
-            end
+    flag = 0;
+    for i = 1:length(xmin)
+        if optimum 
         end
-        if flag
-            disp('fminsearch for MES-G failed to search within [xmin, xmax].')
-            optimum = start;
-        end
+    end
     end
 end

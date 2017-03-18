@@ -96,11 +96,13 @@ for t = tstart+1 : T
             % (Kandasamy et al. ICML 2015)
             alpha = 1;
             beta = sqrt(size(xx_sub,2)*log(2*t)/5);
-            optimum = ucb_choose(xx_sub, yy, KernelMatrixInv, sigma0, sigma, l, xmin_sub, xmax_sub, alpha, beta, fixhyp);
+            optimum = ucb_choose(xx_sub, yy, KernelMatrixInv, [], ...
+                sigma0, sigma, l, xmin_sub, xmax_sub, alpha, beta);
    
         elseif strcmp(bo_method, 'MES-R')
             maxes_sub = maxes(i,:);
-            optimum = add_mesr_choose(maxes_sub, xx_sub, yy, KernelMatrixInv,  sigma0, sigma, l, xmin_sub, xmax_sub);
+            optimum = add_mesr_choose(maxes_sub, xx_sub, yy, ...
+                KernelMatrixInv,  sigma0, sigma, l, xmin_sub, xmax_sub);
 
         elseif strcmp(bo_method, 'MES-G')
             optimum = add_mesg_choose(nK, xx_sub, yy, KernelMatrixInv, sigma0, sigma, l, xmin_sub, xmax_sub, theta_shift, islog, logfileID);

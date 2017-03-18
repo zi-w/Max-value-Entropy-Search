@@ -23,6 +23,7 @@ end
 if ~isfield(options, 'restart'); options.restart = 0; end
 if ~isfield(options, 'bo_method'); options.bo_method = 'MES-G'; end
 if ~isfield(options, 'savefilenm'); options.savefilenm = []; end
+% When testing synthetic functions, one can add noise to the output.
 if ~isfield(options, 'noiselevel'); options.noiselevel = 0; end
 if isfield(options, 'nM'); nM = options.nM; else nM = 10; end
 if isfield(options, 'nK'); nK = options.nK; else nK = 1; end
@@ -104,8 +105,8 @@ for t = tstart+1 : T
         optimum = ei_choose(xx, yy, KernelMatrixInv, guesses, ...
             sigma0, sigma, l, xmin, xmax);
     elseif strcmp(options.bo_method, 'PI')
-        optimum = pi_choose(nM, nK, xx, yy, KernelMatrixInv, guesses, ...
-            sigma0, sigma, l, xmin, xmax, nFeatures, m0);
+        optimum = pi_choose(xx, yy, KernelMatrixInv, guesses, ...
+            sigma0, sigma, l, xmin, xmax);
     elseif strcmp(options.bo_method, 'UCB')
         alpha = 1;
         beta = (2*log(t^2*2*pi^2/(3*0.01)) + 2*length(xmin)*log(t^2*...
@@ -147,7 +148,6 @@ for t = tstart+1 : T
     guesses = [ guesses ; optimum ];
     guessvals = [guessvals; objective(optimum)];
     
-    disp(['elapsed choosing time is ' num2str(choose_time(end))])
     disp([num2str(t) ': tested ' num2str(xx(end,:)) '; val=' num2str(yy(end,:)) ...
         '; guess ' num2str(optimum) ' val=' num2str(guessvals(end))])
     

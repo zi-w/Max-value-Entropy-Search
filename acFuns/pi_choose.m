@@ -1,4 +1,5 @@
-function [optimum, fval] = pi_choose(xx, yy, KernelMatrixInv, sigma0, sigma, l, xmin, xmax, m0)
+function [optimum, fval] = pi_choose(xx, yy, KernelMatrixInv, guesses, ...
+    sigma0, sigma, l, xmin, xmax)
 % This function returns the next evaluation point using PI.
 % xx, yy are the current observations.
 % KernelMatrixInv is the gram maxtrix inverse under different GP
@@ -8,6 +9,6 @@ function [optimum, fval] = pi_choose(xx, yy, KernelMatrixInv, sigma0, sigma, l, 
 % xmin, xmax are the lower and upper bounds for the search space.
 
 % Define the acquisition function (and gradient) of EI.
-acfun = @(x) evaluatePI(x, xx, yy, KernelMatrixInv, l, sigma, sigma0, m0);
+acfun = @(x) evaluatePI(x, xx, yy, KernelMatrixInv, l, sigma, sigma0);
 % Optimize the acquisition function.
 [optimum, fval] = globalMaximization(acfun, xmin, xmax, [guesses;xx]);
