@@ -1,4 +1,4 @@
-% Author: Zi Wang
+% Copyright (c) 2017 Zi Wang
 function [f, g] = evaluateMES(x, maxes, xx, yy, KernelMatrixInv, ...
     l, sigma, sigma0)
 % This function computes the acquisition function value f and gradient g at 

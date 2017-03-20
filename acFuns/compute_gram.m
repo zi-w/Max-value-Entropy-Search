@@ -1,4 +1,4 @@
-% Author: Zi Wang
+% Copyright (c) 2017 Zi Wang
 function K = compute_gram(xx, hyp, hyp_idx, z)
 % This function computes the gram matrix for an add-GP.
 all_cat = unique(z);

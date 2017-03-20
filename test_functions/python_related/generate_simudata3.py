@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Author: Zi Wang
+# Copyright (c) 2017 Zi Wang
 from push_world import *
 import sys
 

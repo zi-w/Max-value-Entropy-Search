@@ -1,4 +1,4 @@
-% Author: Zi Wang
+% Copyright (c) 2017 Zi Wang
 function [meanVector, varVector, meangrad, vargrad] = mean_var(x, ...
     Xsamples, Ysamples, KernelMatrixInv, l_, sigma_, sigma0_)
 % This function returns the posterior GP mean and variance predictions made

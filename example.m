@@ -1,3 +1,4 @@
+% Copyright (c) 2017 Zi Wang
 clear all; clc;
 % add necessary paths
 deploy;

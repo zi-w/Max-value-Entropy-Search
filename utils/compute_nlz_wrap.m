@@ -1,4 +1,4 @@
-% Author: Zi Wang
+% Copyright (c) 2017 Zi Wang
 function nlz = compute_nlz_wrap(xx, yy, params, n_partition, z)
 % This function returns the negative log data liklihood for add-GP.
 

@@ -1,3 +1,4 @@
+% Copyright (c) 2017 Zi Wang
 function f = sample_GPprior(dx)
 nFeatures = 10000;
 l = ones(1, dx)*256.;

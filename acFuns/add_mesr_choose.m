@@ -1,3 +1,4 @@
+% Copyright (c) 2017 Zi Wang
 function optimum = add_mesr_choose(maxes, xx, yy, KernelMatrixInv, sigma0, sigma, l, xmin, xmax)
 % This function returns the next evaluation point using add-MES-R.
 % maxes is a nZ x nK matrix with sampled max-values of size nK for each 

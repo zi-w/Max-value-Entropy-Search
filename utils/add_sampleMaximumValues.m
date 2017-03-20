@@ -1,4 +1,4 @@
-% Author: Zi Wang
+% Copyright (c) 2017 Zi Wang
 % See also: sampleMaximumValues.m
 function [ samples] = add_sampleMaximumValues(nK, xx, yy, sigma0, ...
     sigma, l, xmin, xmax, nFeatures, cz, all_cat)

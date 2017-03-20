@@ -1,4 +1,4 @@
-% Author: Zi Wang
+% Copyright (c) 2017 Zi Wang
 function z = sample_categorical(p, dx)
 % This function samples from a categorical distribution 
 rd = rand(1,dx);

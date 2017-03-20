@@ -1,3 +1,4 @@
+% Copyright (c) 2014, J.M. Hernandez-Lobato, M.W. Hoffman, Z. Ghahramani
 % This function is adapted from the code for the paper
 % Hernández-Lobato J. M., Hoffman M. W. and Ghahramani Z.
 % Predictive Entropy Search for Efficient Global Optimization of Black-box

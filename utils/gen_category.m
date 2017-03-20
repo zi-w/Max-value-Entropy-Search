@@ -1,4 +1,4 @@
-% Author: Zi Wang
+% Copyright (c) 2017 Zi Wang
 function z = gen_category(dx)
 % Generate synthetic category,
 % with at most 3 dimensional substructure

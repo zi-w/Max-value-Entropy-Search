@@ -1,3 +1,4 @@
+% Copyright (c) 2017 Zi Wang
 function f = robot_pushing_4(rpos, angle, simu_steps, gpos)
 % Returns the distance to goal of an object pushed by a pusher.
 % The goal is to minimize f.

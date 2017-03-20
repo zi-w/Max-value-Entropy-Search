@@ -1,4 +1,4 @@
-% Author: Zi Wang
+% Copyright (c) 2017 Zi Wang
 function [f, f2]= nnet_cancer(nnsize, mu, mu_dec, mu_inc)
 % The goal is to maximize the output f. (f = 1 - validation error)
 % nnsize \in [1 100] 

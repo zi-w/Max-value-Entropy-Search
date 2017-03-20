@@ -1,3 +1,4 @@
+% Copyright (c) 2017 Zi Wang
 function [optimum, fval] = pi_choose(xx, yy, KernelMatrixInv, guesses, ...
     sigma0, sigma, l, xmin, xmax)
 % This function returns the next evaluation point using PI.

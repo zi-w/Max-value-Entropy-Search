@@ -1,3 +1,9 @@
+% Copyright (c) 2017 Zi Wang
+% Copyright (c) 2014, J.M. Hernandez-Lobato, M.W. Hoffman, Z. Ghahramani
+% This function is partially adapted from the code for the paper
+% Hernández-Lobato J. M., Hoffman M. W. and Ghahramani Z.
+% Predictive Entropy Search for Efficient Global Optimization of Black-box
+% Functions, In NIPS, 2014.
 function [ optimum, fval] = globalMinimization(target, xmin, xmax, guesses)
 
 d = size(xmin, 1);

@@ -1,4 +1,4 @@
-% Author: Zi Wang
+% Copyright (c) 2017 Zi Wang
 % See also: gpopt.m
 function results = add_gpopt(objective, xmin, xmax, T, initx, inity, options)
 % This function maximizes the function objective using BO with add-GP and 

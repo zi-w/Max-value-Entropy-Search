@@ -1,4 +1,4 @@
-% Author: Zi Wang
+% Copyright (c) 2017 Zi Wang
 function optimum = mesg_choose(nM, nK, xx, yy, KernelMatrixInv, ...
     guesses, sigma0, sigma, l, xmin, xmax)
 % This function returns the next evaluation point using MES-G.

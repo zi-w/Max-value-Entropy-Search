@@ -1,5 +1,5 @@
-% Author: Zi Wang
-% This function is adapted from the code for the paper
+% Copyright (c) 2017 Zi Wang
+% This function is partially adapted from the code for the paper
 % Hernández-Lobato J. M., Hoffman M. W. and Ghahramani Z.
 % Predictive Entropy Search for Efficient Global Optimization of Black-box
 % Functions, In NIPS, 2014.

@@ -1,3 +1,4 @@
+% Copyright (c) 2017 Zi Wang
 function [f, g] = evaluateEI(x, xx, yy, KernelMatrixInv, l, sigma, sigma0, m0)
 % This function computes the acquisition function value f and gradient g at
 % the queried point x using EI given sampled function values maxes, and

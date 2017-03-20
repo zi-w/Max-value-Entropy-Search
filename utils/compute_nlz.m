@@ -1,4 +1,4 @@
-% Author: Zi Wang
+% Copyright (c) 2017 Zi Wang
 function nlz = compute_nlz(xx, yy, hyp, z)
 % Computes the negative log marginal likelihood for add-GP
 nlz = 0;

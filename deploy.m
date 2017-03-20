@@ -1,3 +1,4 @@
+% Copyright (c) 2017 Zi Wang
 addpath GPstuff-4.4/diag
 addpath GPstuff-4.4/dist
 addpath GPstuff-4.4/gp

@@ -1,3 +1,4 @@
+% Copyright (c) 2017 Zi Wang
 function optimum = add_est_choose(xx, yy, KernelMatrixInv,  sigma0, sigma, l, xmin, xmax)
 % This function returns the next evaluation point using add-EST.
 % xx, yy are the current observations.

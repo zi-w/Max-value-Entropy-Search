@@ -1,3 +1,4 @@
+% Copyright (c) 2017 Zi Wang
 function [f, g] = evaluateUCB(x, xx, yy, KernelMatrixInv, l, sigma, ...
     sigma0, alpha, beta)
 % This function computes the acquisition function value f and gradient g at

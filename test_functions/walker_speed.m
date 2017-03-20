@@ -1,4 +1,4 @@
-% Author: Zi Wang
+% Copyright (c) 2017 Zi Wang
 function ret = walker_speed(hyperparams)
 % Wrapper of walker_main.
 % hyperparams(1) \in [1,10]

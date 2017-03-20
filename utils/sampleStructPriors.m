@@ -1,4 +1,4 @@
-% Author: Zi Wang
+% Copyright (c) 2017 Zi Wang
 function [decomp, hyp] = sampleStructPriors(xx, yy, fixhyp)
 % This function optimizes the hyper parameters and the decomposition of
 % input dimensions of add-GP.

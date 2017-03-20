@@ -1,3 +1,4 @@
+% Copyright (c) 2017 Zi Wang
 function optimum = ucb_choose(xx, yy, KernelMatrixInv, guesses, sigma0, ...
     sigma, l, xmin, xmax, alpha, beta)
 % This function returns the next evaluation point using EI.

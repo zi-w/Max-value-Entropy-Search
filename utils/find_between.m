@@ -1,4 +1,4 @@
-% Author: Zi Wang
+% Copyright (c) 2017 Zi Wang
 function res = find_between(val, func, funcvals, mgrid, thres)
 % This function finds res\in\R such that func(res) = val via binary search.
 % mgrid is a vector such that min(mgrid) < res < max(mgrid).

@@ -1,4 +1,4 @@
-% Author: Zi Wang
+% Copyright (c) 2017 Zi Wang
 function K = computeAddKnm(xx, xxp, hyp, hyp_idx, z)
 % Compute the additive kernel Knm 
 all_cat = unique(z);

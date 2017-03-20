@@ -1,5 +1,6 @@
-%% generate synthetic test functions for add gp opt.
+% Copyright (c) 2017 Zi Wang
 function f = sample_addGP(dx, n_partition, xmin, xmax)
+% Generate synthetic test functions for add gp opt.
 z_o = gen_category(dx);
 fixhyp.l = ones(1,dx)*50;
 fixhyp.sigma = ones(1, n_partition)*5;

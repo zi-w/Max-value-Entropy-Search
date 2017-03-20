@@ -1,4 +1,4 @@
-% Author: Zi Wang
+% Copyright (c) 2017 Zi Wang
 function Xgrid = rand_sample_interval(xmin, xmax, gridSize)
     % Uniformly randomly sample gridSize number of points in intervals
     % defined by xmin and xmax.
