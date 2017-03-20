@@ -15,8 +15,13 @@ options.savefilenm = [];
 options.bo_method = 'Add-MES-R';
 % Set the number of maximums to sample
 options.nK = 5;
+% Set the GP hyper-parameters if you would like to fix them.
+% Comment the following 3 lines out if you would like to learn them.
+options.l = ones(1,dx)*50;
+options.sigma = ones(1, dx)*5;
+options.sigma0 = 0.0001*ones(1, dx);
 % Start BO
-% Set the number of hyper-parameter settings to be sampled
+% Set the number of GP hyper-parameter settings to be sampled
 % options.nM = 10;
 %gpopt(f, xmin, xmax, 200, [], [], options);
 
@@ -27,5 +32,5 @@ options.nK = 5;
 % The additive learning strategy is based on the paper
 % Wang, Zi and Li, Chengtao and Jegelka, Stefanie and Kohli, Pushmeet. 
 % Batched High-dimensional Bayesian Optimization via Structural Kernel 
-% Learning. arXiv preprint arXiv:1703.01973
+% Learning. arXiv preprint arXiv:1703.01973.
 add_gpopt(f, xmin, xmax, 200, [], [], options)

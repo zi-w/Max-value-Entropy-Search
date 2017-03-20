@@ -13,7 +13,7 @@ if isfield(fixhyp, 'l') && isfield(fixhyp, 'sigma') ...
     hyp.l = fixhyp.l;
     hyp.sigma = fixhyp.sigma;
     hyp.sigma0 = fixhyp.sigma0;
-    [decomp] = learn_partition(xx, yy, hyp, fixhyp);
+    [decomp] = learn_partition(xx, yy, hyp, fixhyp, n_partition);
 else
     % learn l and sigma and sigma0
     prob_partition = ones(1,n_partition)/n_partition;
@@ -159,6 +159,6 @@ for i = 1:N_gibbs
     end
     
 end
-decomp = z_best
+decomp = z_best;
 
 end
