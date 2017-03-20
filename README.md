@@ -51,11 +51,11 @@ Our strategy for learning the Gaussian process additive structure is based on Wa
 ## Example functionals for optimization
 In test_functions/, we provide some functionals one can use to test Bayesian optimization algorithms. 
 
-1. Approximated functions sampled from Gaussian processes
-2. Optimization test functions
-3. Tuning hyper-parameters for neural networks 
-4. Active learning for robot pushing
-5. Tuning the walking speed of a planar bipedal robot
+1. Approximated functions sampled from Gaussian processes: sample_GPprior.m, sample_addGP.m.
+2. Optimization test functions: egg.m, michNf.m, shekelMf.m.
+3. Tuning hyper-parameters for neural networks: nnet_boston.m, nnet_cancer.m.
+4. Active learning for robot pushing: robot_pushing_3.m, robot_pushing_4.m, two_robot_pushing.m.
+5. Tuning the walking speed of a planar bipedal robot: walker_speed.m (Westervelt el al., 2007).
 
 ## Citation
 Please cite our work if you would like to use the code.
@@ -81,3 +81,4 @@ Please cite our work if you would like to use the code.
 * Jarno Vanhatalo, Jaakko Riihimäki, Jouni Hartikainen, Pasi Jylänki, Ville Tolvanen, Aki Vehtari. GPstuff: Bayesian Modeling with Gaussian Processes. Journal of Machine Learning Research, 14(Apr):1175-1179, 2013.
 * Kandasamy, Kirthevasan, Schneider, Jeff, and Poczos, Barnabas. High dimensional Bayesian optimisation and bandits via additive models. In International Conference on Machine Learning (ICML), 2015.
 * Wang, Zi, Li, Chengtao, Jegelka, Stefanie, and Kohli, Pushmeet. Batched High-dimensional Bayesian Optimization via Structural Kernel Learning. arXiv preprint arXiv:1703.01973, 2017.
+* Westervelt, Eric R, Grizzle, Jessy W, Chevallereau, Christine, Choi, Jun Ho, and Morris, Benjamin. Feedback control of dynamic bipedal robot locomotion, volume 28. CRC press, 2007.
