@@ -25,7 +25,9 @@ if ~isfield(options, 'bo_method'); options.bo_method = 'MES-G'; end
 if ~isfield(options, 'savefilenm'); options.savefilenm = []; end
 % When testing synthetic functions, one can add noise to the output.
 if ~isfield(options, 'noiselevel'); options.noiselevel = 0; end
+% Number of hyper parameter settings to be sampled.
 if isfield(options, 'nM'); nM = options.nM; else nM = 10; end
+% Number of maximums to be sampled.
 if isfield(options, 'nK'); nK = options.nK; else nK = 1; end
 if isfield(options, 'nFeatures')
     nFeatures = options.nFeatures;

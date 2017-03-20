@@ -47,5 +47,23 @@ target_gradient = @(x) evaluateEST(x, xx, yy, KernelMatrixInv, l, sigma, sigma0,
 [ optimum, fval] = fmincon(target_gradient, start, [], [], [], [], xmin, xmax, [], ...
     optimset('MaxFunEvals', 100, 'TolX', eps, 'Display', 'off', 'GradObj', 'on'));
 if minVal < fval
-    optimum = start;
+    %disp('fmincon for EST failed to return a value better than the initialization.')
+    [optimum, fval] = fminsearch(acfun, start);
+    if minVal < fval
+        %disp('fminsearch for EST failed to return a value better than the initialization.')
+        optimum = start;
+    else
+        % check if optimum is in range
+        flag = 0;
+        for i = 1:length(xmin)
+            if optimum(i) < xmin(i) || optimum(i) > xmax(i)
+                flag = 1;
+                break;
+            end
+        end
+        if flag
+            %disp('fminsearch for EST failed to search within [xmin, xmax].')
+            optimum = start;
+        end
+    end
 end

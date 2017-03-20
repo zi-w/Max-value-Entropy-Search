@@ -17,7 +17,7 @@ if nargin <= 6
     options = struct();
 end
 if ~isfield(options, 'restart'); options.restart = 0; end
-if ~isfield(options, 'bo_method'); options.bo_method = 'mes-g'; end
+if ~isfield(options, 'bo_method'); options.bo_method = 'add-MES-G'; end
 if ~isfield(options, 'savefilenm'); options.savefilenm = []; end
 % When testing synthetic functions, one can add noise to the output.
 if ~isfield(options, 'noiselevel'); options.noiselevel = 0; end
