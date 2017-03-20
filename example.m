@@ -12,7 +12,7 @@ options.savefilenm = [];
 
 % Start BO
 
-% gpopt(f, xmin, xmax, 200, [], [], options);
+gpopt(f, xmin, xmax, 200, [], [], options);
 
 % Start BO with add-GP
-add_gpopt(f, xmin, xmax, 200, [], [], options)
+% add_gpopt(f, xmin, xmax, 200, [], [], options)

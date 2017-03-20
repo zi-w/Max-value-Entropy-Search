@@ -1,0 +1,262 @@
+
+2014-04-11 Version 4.4
+
+New features
+ - Monotonicity constraint for the latent function. 
+
+   Riihimäki and Vehtari (2010). Gaussian processes with monotonicity
+     information.  Journal of Machine Learning Research: Workshop and
+     Conference Proceedings, 9:645-652.
+
+ - State space implementation for GP inference (1D) using Kalman filtering.
+   For the following covariance functions
+     - Squared-Exponential 
+     - Matérn-3/2 & 5/2 
+     - Exponential
+     - Periodic
+     - Constant
+
+   Särkkä, S., Solin, A., Hartikainen, J. (2013). 
+     Spatiotemporal learning via infinite-dimensional Bayesian filtering and 
+     smoothing. IEEE Signal Processing Magazine, 30(4):51-61.   
+   Simo Sarkka (2013). Bayesian filtering and smoothing. Cambridge 
+     University Press.
+   Solin, A. and Särkkä, S. (2014). Explicit link between periodic 
+     covariance functions and state space models. AISTATS 2014. 
+
+Improvements
+ - GP_PLOT function for quick plotting of GP predictions
+ - GP_IA now warns if it detects multimodal posterior distributions
+ - much faster EP with log-Gaussian likelihood (numerical integrals -> 
+   analytical results)
+ - faster WAIC with GP_IA array (numerical integrals -> analytical results)
+ - New demos demonstrating new features etc.
+    - demo_minimal, minimal demo for regression and classification
+    - demo_kalman1, demo_kalman2
+    - demo_monotonic, demo_monotonic2
+
+Bug fixes
+ - Periodic covariance function works with selectedVariables
+ - Survival likelihoods (log-Gaussian, log-Logistic and Weibull) work now with
+   empty z for uncensored data
+ - Return parameters in correct order from gp_pak if using hyperhyperpriors
+ - Other bug fixes
+
+2013-11-26 Version 4.3.1
+
+Improvements:
+ - Updated cpsrf and psrf to follow BDA3: split each chain to two
+   halves and use Geyer's IPSE for n_eff
+ - Multi-latent models for Octave
+
+2013-10-14 Version 4.3
+
+Improvements:
+ - lgpdens.m: better default estimation using importance and rejection sampling, better default priors
+ - Robust-EP for zero truncated negative-binomial likelihood
+ - If moment computations in EP return NaN, return NaN energy (handled
+   gracefully by fminlbfgs and fminscg)
+ - gp_cpred.m: new option 'target'
+ - gp_ia.m: Changed Hessian computation stepsize to 1e-3
+ - gpstuff_version.m: function for returning current GPstuff version
+ - gpia_jpreds.m: a new function
+ - demo_survival_weibull.m -> demo_survival_aft.m
+
+Bug fixes:
+ - build suitesparse path correctly if it includes spaces
+ - gp_avpredcomp.m: fixed for Cox-PH
+ - gp_cpred.m: fixed for Cox-PH
+ - esls.m: don't accept a step to a point with infinite log likelihood
+ - gp_ia.m: removed some redundant computation
+ - gp_rnd.m: works now for multilatent models also
+ - bugfixes for setrandstream
+ - other bugfixes 
+
+
+2013-06-13 Version 4.2
+
+Improvements
+ - Cross-validation much faster if no bias-corrections are needed (computes
+   only the necessary predictions)
+ - Marginal posterior corrections with loopred (Laplace) and cross-validation
+ - More robust computation of marginal posterior corrections (utilize 
+   log distributions)
+ - More robust density estimation in lgpdens (default parameters changed)
+
+Bug fixes
+ - Mex files now in correct folders if compiled with SuiteSparse (covariance matrix
+   computation now much faster)
+ - Fixed bug with default marginal posterior correction when using gp_predcm
+ - Fixed conditions in likelihood functions for grid approximation of 
+   predictions with marginal posterior corrections
+ - Fixed outputs of gpmc_preds with multilatent models (thanks to Mahdi
+   Biparva for pointing this out)
+ - and some minor bug fixes
+
+2013-04-24 Version 4.1
+
+New features:
+  - Multinomial probit classification with nested-EP. Jaakko Riihimäki, 
+    Pasi Jylänki and Aki Vehtari (2013). Nested Expectation Propagation 
+    for Gaussian Process Classification with a Multinomial Probit 
+    Likelihood. Journal of Machine Learning Research 14:75-109, 2013.
+  - Marginal posterior corrections for latent values. Cseke & Heskes 
+    (2011). Approximate Marginals in Latent Gaussian Models. Journal of 
+    Machine Learning Research 12 (2011), 417-454
+     - Laplace: cm2 and fact
+     - EP: fact
+
+Improvements
+ - lgpdens ignores now NaNs instead of giving error
+ - gp_cpred has a new option 'target' accpeting values 'f' or 'mu'
+ - unified gp_waic and gp_dic
+   - by default return mlpd
+   - option 'form' accetps now values 'mean' 'all' 'sum' and 'dic'
+ - improved survival demo demo_survival_aft (accalerated failure time)
+   - renamed and improved from demo_survival_weibull
+ - rearranged some files to more logical directories
+ - bug fixes 
+
+New files
+ - gp_predcm: marginal posterior corrections for latent values.
+ - demo_improvedmarginals: demonstration of marginal posterior corrections
+ - demo_improvedmarginals2: demonstration of marginal posterior corrections
+ - lik_multinomprobit: multinomial probit likelihood
+ - demo_multiclass_nested_ep: demonstration of nested EP with multinomprobit
+
+
+2013-03-12 Version 4.0
+
+New features:
+  - Multilatent models: multinomial, softmax, Cox-PH, density
+    estimation, density regression, input dependent noise, input
+    dependent overdispersion in Weibull, zero-inflated negative binomial
+  - Survival models: Cox-PH, Log-Gaussian, Log-logistic, diagnostic criteria
+  - Quantile regression
+  - PASS-GP active set selection for classification
+  - optional memory save in gradient computation
+  - approximative gradient for EP-LOO
+  - Octave compatibility. Please download Octave specific version of GPstuff
+    to use GPstuff with Octave. Following features of v4.0 work only with 
+    Matlab:
+     - Inputdependent multilatent models
+     - Zero-Inflated Negative-Binomial model
+     - Cox proportional hazard model
+     - Compactly Supported (PPCS*) covariance functions
+     - Kronecker speedup for density estimation
+
+Improvements:
+  - much faster parallel-EP (now default)
+  - faster sequential EP
+
+New functions & files
+  - demo_inputdependentnoise: input dependent noise in Gaussian model
+  - demo_inputdependentweibull: input dependent overdispersion in Weibull
+  - demo_lgpdens: density estimation, density regression
+  - demo_loopred: leave-one-out cross-validation approximations
+  - demo_mcmc: different MCMC methods demonstrated
+  - demo_memorysave: memory save in gradient computation
+  - demo_modelcomparison2: additional model comparsion demo
+  - demo_multiclass: multi-class classification
+  - demo_multinom: multinomial model
+  - demo_passgp: PASS-GP active set selection for classification
+  - demo_quantilegp: Quantile regression
+  - demo_survival_comparison: survival model diagnostic criteria
+  - demo_survival_coxph: Gaussian process Cox-PH model
+  - demo_zinegbin: zero-inflated negative binomial
+  - gpep_loog.m: approximate gradient for EP-LOO
+  - gp_kfcv_cdf.m: K-fold cross validation to predict CDF for GP model
+  - gp_kfcve.m: mean negative log k-fold-cv predictive density.
+  - gpla_looe.m: Laplace Leave-one-out energy (negative preditive density)
+  - gp_predcdf.m: Predictive distribution CDF estimation
+  - lgpdens_cum.m: Bayesian Bootstrap density estimation integration
+  - lgpdens.m: Density estimation with Gaussian Processes
+  - lik_coxph.m: Cox proportaional hazard likelihood
+  - lik_inputdependentnoise.m: Input-dependent noise likelihood
+  - lik_inputdependentweibull.m: Input-dependent Weibull likelihood
+  - lik_lgpc.m: Logistic likelihood for conditional density estimation
+  - lik_lgp.m: Logistic likelihood for density estimation
+  - lik_loggaussian.m: Log-Gaussian likelihood
+  - lik_loglogistic.m: Log-logistic likelihood
+  - lik_multinom.m: Multinomial likelihood
+  - lik_qgp.m: Quantile-GP regression likelihood
+  - lik_softmax.m: Softmax (multiclass) likelihood
+  - lik_zinegbin.m: Zero-Inflated Negative-Binomial likelihood
+  - passgp.m: Pass-GP routine 
+  - pred_coxphhs.m: Hazard and survival functions for Cox-Ph likelihood
+  - pred_coxph.m: Returns useful values for Cox-PH likelihood
+  - pred_coxphp.m: Integrate model (cox-ph) with respect to time
+
+And some bug fixes 
+
+2012-10-29 Version 3.4.1 published.
+
+Bug fixes
+ - LOO-CV predictions fixed (gp_loopred, gpmc_loopred, gpla_e, gpep_e)
+ - k-fold-cv for PIC sparse approximation fixed (gp_kfcv)
+ - other bug fixes (gp_pred, gp_e, prior_t)
+
+Improved functions
+ - LOO-CV added to demo_modelassessment1, demo_modelassessment2,
+   xunit tests
+ - DTC,VAR,SOR sparse approximations for Laplace (gpla_g, gpla_pred)
+ - improved robustnes of optimisation functions (fminscg, fminlbfgs)
+ - new function for setting random stream (setrandstream)
+ - many demos made to display less clutter
+
+2012-10-08 Version 3.4 published. 
+
+Improved functions
+ - GP_IA     improved autoscale and display options
+ - GP_KFCV   optional return values for cvpreds (f,lp,y)
+ - GP_LOOEG  approximate gradients for EP-LOO (no implicit terms)
+ - GP_OPTIM  new options 'lambda' and 'lambdalimit' used by fminscg
+ - GP_SET    new option 'savememory' for memory saving in gradient calculations
+ - FMINSCG   new options 'lambda' and 'lambdalimit'
+
+Other changes
+ - SuiteSparse v 3.4 included in the distribution package
+ - gp/demos renamed to gp/demodata
+ - Few bug fixes and several documentation fixes
+
+2012-06-20 Version 3.3 published. Some new functions and bug fixes. 
+
+New functions
+ - GP_CPRED      Conditional predictions using specific covariates
+ - GPCF_SCALED   Create a scaled covariance function
+ - SURROGATE_SLS Markov chain Monte Carlo sampling using Surrogate 
+                 data Slice Sampling
+
+ - PRIOR_INVT    Inverse Student-t prior structure
+ - PRIOR_INVUNIF Inverse uniform prior structure
+ - PRIOR_LOGT    Student-t prior structure for the logarithm of the parameter
+
+ - HMC_NUTS      No-U-Turn Sampler (NUTS)
+
+ - ADDLOGS       Add numbers represented by their logarithms.
+ - LOGITINV      Inverse of the logit transformation
+ - MAPCOLOR      Returns a colormap ranging from blue through gray to red
+ - SUMLOGS       Sum of vector where numbers are represented by
+                 their logarithms.
+
+ - TEST_ALL      Unit testing with xunit package (requires xunit
+                 from Mathowrks File Exchange)
+
+Improved functions
+ - Robust-EP method improved
+ - GP_PRED       Makes predictions using training data if no test
+                 data is given
+ - GP_LOOPRED    Supports now sparse approximations FIC, PIC,
+                 CS+FIC and latent method Laplace
+ - GP_MC         By default use Surrogate Slice Sampler for
+                 hyperparameters and Elliptical Slice Sampler for
+                 latent values. Supports now also NUTS.
+ - SLS           Added Shrinking-rank SLS, Covariance-matching SLS
+
+Several bug and documentation fixes
+
+2012-03-16 Version 3.2.1 published. Many bug fixes.
+
+2011-10-11 Version 3.2 published. New observation models and new inference algorithms (e.g. EP for Student-t model) added plus bug fixes.
+
+2011-04-15 Version 3.1 published. New functionalities and major update to argument syntax making the package easier to use.

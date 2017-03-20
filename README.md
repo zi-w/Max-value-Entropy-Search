@@ -1,6 +1,4 @@
-# This repository is under construction.
-
-# Max-value-Entropy-Search
+# Max-value Entropy Search
 This is the MATLAB code repository associated with the paper [_Max-value Entropy Search for Efficient Bayesian Optimization_](https://arxiv.org/abs/1703.01968). We propose a new Bayesian optimization technique called **Max-value Entropy Search**, which maximizes the multual information between the selected future observations and the max-value of the function. Please refer to the paper if you need more details on the algorithm.
 
 We developed our code building upon some basic Gaussian process functionals from predictive entropy search (Hernandez-Lobato et al., 2014), which was developed upon GPstuff (Vanhatalo et al., 2013). 
