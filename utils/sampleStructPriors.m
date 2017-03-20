@@ -22,7 +22,7 @@ else
     else
         decomp = sample_categorical(prob_partition, dx);
     end
-    % you can increase numIter 
+    % you can increase numIter
     numIter = 2;
     guess_params = [];
     for i = 1:numIter
@@ -46,7 +46,7 @@ else
         hyp.sigma = sigma;
         hyp.sigma0 = sigma0;
         % learn z
-        [decomp] = learn_partition(xx, yy, hyp, fixhyp);
+        [decomp] = learn_partition(xx, yy, hyp, fixhyp, n_partition);
         fixhyp.z = decomp;
     end
     
@@ -54,18 +54,18 @@ end
 
 end
 
-function [decomp] = learn_partition(xx, yy, hyp, fixhyp)
+function [decomp] = learn_partition(xx, yy, hyp, fixhyp, n_partition)
 if isfield(fixhyp, 'decomp')
     decomp = fixhyp.decomp;
     return;
 end
-n_partition = fixhyp.n_partition;
+%n_partition = fixhyp.n_partition;
 % Number of iterations for gibbs sampling.
 N_gibbs = 10;
 gibbs_iter = floor(N_gibbs/2);
 % Limit the number of dimensions in each group because BO cannot do well in
 % high dimensions.
-dim_limit = 4;
+dim_limit = 5;
 
 % You may want to set maxNdata to be small to speed up this function.
 maxNdata = 750;
@@ -159,6 +159,6 @@ for i = 1:N_gibbs
     end
     
 end
-decomp = z_best;
+decomp = z_best
 
 end

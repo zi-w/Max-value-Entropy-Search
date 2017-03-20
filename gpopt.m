@@ -5,7 +5,7 @@
 % Functions, In NIPS, 2014.
 % https://bitbucket.org/jmh233/codepesnips2014
 function results = gpopt(objective, xmin, xmax, T, initx, inity, options)
-% This function maximizes the function objective via BO and returns results 
+% This function maximizes the function objective via BO and returns results
 % as a cell of size 7, including the inferred argmax points (guesses),
 % the function values of the inferred argmax points (guessvals), the
 % evaluated points (xx), the function values of the evaluated points
@@ -97,7 +97,7 @@ for t = tstart+1 : T
     elseif strcmp(options.bo_method, 'PI')
         optimum = pi_choose(xx, yy, KernelMatrixInv, guesses, ...
             sigma0, sigma, l, xmin, xmax);
-    elseif strcmp(options.bo_method, 'UCB')
+    elseif strcmp(options.bo_method, 'GP-UCB')
         alpha = 1;
         beta = (2*log(t^2*2*pi^2/(3*0.01)) + 2*length(xmin)*log(t^2*...
             length(xmin)*max(xmax-xmin)*(log(4*length(xmin)/0.01))^0.5))^0.5;
@@ -106,6 +106,9 @@ for t = tstart+1 : T
     elseif strcmp(options.bo_method, 'EST')
         optimum = est_choose(nM, xx, yy, KernelMatrixInv, guesses, ...
             sigma0, sigma, l, xmin, xmax);
+    else
+        disp('No such BO method.')
+        return;
     end
     
     

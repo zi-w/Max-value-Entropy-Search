@@ -19,6 +19,7 @@ else
 end
 mid = (left + right)/2;
 midval = func(mid);
+cnt = 1;
 while abs(midval - val) > thres
     if midval > val
         right = mid;
@@ -27,5 +28,9 @@ while abs(midval - val) > thres
     end
     mid = (left + right) / 2;
     midval = func(mid);
+    cnt = cnt + 1;
+    if cnt > 10000
+        keyboard;
+    end
 end
 res = mid;

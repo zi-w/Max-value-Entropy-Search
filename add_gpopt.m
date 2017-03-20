@@ -16,12 +16,12 @@ function results = add_gpopt(objective, xmin, xmax, T, initx, inity, options)
 if nargin <= 6
     options = struct();
 end
-if ~isfield(options, 'restart') options.restart = 0; end
+if ~isfield(options, 'restart'); options.restart = 0; end
 if ~isfield(options, 'bo_method'); options.bo_method = 'mes-g'; end
 if ~isfield(options, 'savefilenm'); options.savefilenm = []; end
 % When testing synthetic functions, one can add noise to the output.
 if ~isfield(options, 'noiselevel'); options.noiselevel = 0; end
-if ~isfield(options, 'nK'); options.nK = 1; end
+if isfield(options, 'nK'); nK = options.nK; else nK = 1; end
 if ~isfield(options, 'nFeatures'); options.nFeatures = 10000; end
 if ~isfield(options, 'seed'); options.seed = 42; end
 % Set random seed
@@ -63,10 +63,10 @@ end
 for t = tstart+1 : T
     
     tic
-    if mod(t, fixhyp.learn_interval) == 1
+    if mod(t, options.learn_interval) == 1
         % learn structure
-        [z, hyp, minnlz ] = sampleStructPriors(xx, yy, fixhyp);
-        fixhyp.z = z;
+        [z, hyp] = sampleStructPriors(xx, yy, options);
+        options.z = z;
     end
     extra_time = [extra_time; toc];
     
@@ -77,10 +77,11 @@ for t = tstart+1 : T
     KernelMatrixInv{1} = chol2invchol(KernelMatrix);
 
     all_cat = unique(z);
-    if strcmp(bo_method, 'MES-R')
+    if strcmp(options.bo_method, 'add-MES-R')
         % compute the max-values maxes of size nZ x nK
-        subnFeatures = ceil(optioins.nFeatures/length(all_cat));
-        maxes = add_sampleMaximumValues(1, nK, xx, yy, hyp.sigma0, hyp.sigma, hyp.l, xmin, xmax, subnFeatures, z, all_cat);
+        subnFeatures = ceil(options.nFeatures/length(all_cat));
+        maxes = add_sampleMaximumValues(nK, xx, yy, hyp.sigma0, ...
+            hyp.sigma, hyp.l, xmin, xmax, subnFeatures, z, all_cat);
     end
     xnext = zeros(1, size(xx,2));
     % Start optimization group by group
@@ -92,11 +93,7 @@ for t = tstart+1 : T
         l = hyp.l(:,coords);
         sigma = hyp.sigma(:,all_cat(i));
         sigma0 = hyp.sigma0(:,all_cat(i));
-        if fixhyp.usediscrete
-            fixhyp.cur_discrete = fixhyp.discrete(coords,:);
-            fixhyp.cur_grid = fixhyp.xgrid{i};
-        end
-        if strcmp(bo_method, 'UCB')
+        if strcmp(options.bo_method, 'add-GP-UCB')
             % The parameter is set to be the same as add-GP-UCB 
             % (Kandasamy et al. ICML 2015)
             alpha = 1;
@@ -104,23 +101,28 @@ for t = tstart+1 : T
             optimum = ucb_choose(xx_sub, yy, KernelMatrixInv, [], ...
                 sigma0, sigma, l, xmin_sub, xmax_sub, alpha, beta);
    
-        elseif strcmp(bo_method, 'MES-R')
+        elseif strcmp(options.bo_method, 'add-MES-R')
             maxes_sub = maxes(i,:);
             optimum = add_mesr_choose(maxes_sub, xx_sub, yy, ...
                 KernelMatrixInv,  sigma0, sigma, l, xmin_sub, xmax_sub);
 
-        elseif strcmp(bo_method, 'MES-G')
-            optimum = add_mesg_choose(nK, xx_sub, yy, KernelMatrixInv, sigma0, sigma, l, xmin_sub, xmax_sub, theta_shift, islog, logfileID);
+        elseif strcmp(options.bo_method, 'add-MES-G')
+            optimum = add_mesg_choose(nK, xx_sub, yy, KernelMatrixInv, ...
+                sigma0, sigma, l, xmin_sub, xmax_sub);
 
-        elseif strcmp(bo_method, 'EST')
-            optimum = add_est_choose(nM, xx_sub, yy, KernelMatrixInv, sigma0, sigma, l, xmin_sub, xmax_sub);
+        elseif strcmp(options.bo_method, 'add-EST')
+            optimum = add_est_choose(xx_sub, yy, KernelMatrixInv,...
+                sigma0, sigma, l, xmin_sub, xmax_sub);
+        else
+            disp('No such BO method.')
+            return;
         end
         xnext(coords) = optimum;
     end
     choose_time = [choose_time; toc];
     
     xx = [ xx ; xnext ];
-    yy = [ yy ; objective(xnext) + rand(1) * noiselevel];
+    yy = [ yy ; objective(xnext) + rand(1) * options.noiselevel];
     
     disp([num2str(t) ': ' 'val=' num2str(yy(end,:))])
     % save result every a few iterations
@@ -131,6 +133,6 @@ for t = tstart+1 : T
         results{4} = extra_time;
         results{5} = t;
         results{6} = z;
-        save(savefilenm, 'results');
+        save(options.savefilenm, 'results');
     end
 end
