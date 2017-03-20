@@ -8,11 +8,24 @@ xmin = zeros(dx,1);
 xmax = ones(dx,1);
 
 f = sample_addGP(dx, dx, xmin, xmax);
+
+% Save the file to a path 
 options.savefilenm = [];
-
+% Choose BO methods
+options.bo_method = 'Add-MES-R';
+% Set the number of maximums to sample
+options.nK = 5;
 % Start BO
-
-gpopt(f, xmin, xmax, 200, [], [], options);
+% Set the number of hyper-parameter settings to be sampled
+% options.nM = 10;
+%gpopt(f, xmin, xmax, 200, [], [], options);
 
 % Start BO with add-GP
-% add_gpopt(f, xmin, xmax, 200, [], [], options)
+% add_gpopt does not support sampling multiple hyper-parameter settings.
+% see sampleStructPriors.m for more details on learning hyper-parameters
+% and the additive structure of the function.
+% The additive learning strategy is based on the paper
+% Wang, Zi and Li, Chengtao and Jegelka, Stefanie and Kohli, Pushmeet. 
+% Batched High-dimensional Bayesian Optimization via Structural Kernel 
+% Learning. arXiv preprint arXiv:1703.01973
+add_gpopt(f, xmin, xmax, 200, [], [], options)

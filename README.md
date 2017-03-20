@@ -57,7 +57,7 @@ In test-functions/, we provide some functionals one can use to test Bayesian opt
 4. Active learning for robot pushing
 5. Tuning the walking speed of a planar bipedal robot
 
-## Approximated BibTex Entry
+## Citation
 Please cite our work if you would like to use the code.
 ```
 @article{wang2017maxvalue,
