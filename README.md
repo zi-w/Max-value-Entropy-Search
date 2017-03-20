@@ -49,7 +49,7 @@ For high dimensional Bayesian optimization with additive Gausian processes, we i
 
 Our strategy for learning the Gaussian process additive structure is based on Wang et al., 2017.
 ## Example functionals for optimization
-In test-functions/, we provide some functionals one can use to test Bayesian optimization algorithms. 
+In test_functions/, we provide some functionals one can use to test Bayesian optimization algorithms. 
 
 1. Approximated functions sampled from Gaussian processes
 2. Optimization test functions
