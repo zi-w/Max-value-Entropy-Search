@@ -12,15 +12,19 @@ f = sample_addGP(dx, dx, xmin, xmax);
 
 % Save the file to a path 
 options.savefilenm = [];
+
 % Choose BO methods
-options.bo_method = 'Add-MES-G';
+% options.bo_method = 'Add-MES-G';
+
 % Set the number of maximums to sample
 options.nK = 5;
+
 % Set the GP hyper-parameters if you would like to fix them.
 % Comment the following 3 lines out if you would like to learn them.
 options.l = ones(1,dx)*50;
 options.sigma = ones(1, dx)*5;
 options.sigma0 = 0.0001*ones(1, dx);
+
 % Start BO
 % Set the number of GP hyper-parameter settings to be sampled
 % options.nM = 10;
