@@ -4,7 +4,7 @@ clear all; clc;
 deploy;
 
 % Define function
-dx = 10;
+dx = 3;
 xmin = zeros(dx,1);
 xmax = ones(dx,1);
 
@@ -24,7 +24,7 @@ options.sigma0 = 0.0001*ones(1, dx);
 % Start BO
 % Set the number of GP hyper-parameter settings to be sampled
 % options.nM = 10;
-%gpopt(f, xmin, xmax, 200, [], [], options);
+gpopt(f, xmin, xmax, 200, [], [], options);
 
 % Start BO with add-GP
 % add_gpopt does not support sampling multiple hyper-parameter settings.
@@ -34,4 +34,4 @@ options.sigma0 = 0.0001*ones(1, dx);
 % Wang, Zi and Li, Chengtao and Jegelka, Stefanie and Kohli, Pushmeet. 
 % Batched High-dimensional Bayesian Optimization via Structural Kernel 
 % Learning. arXiv preprint arXiv:1703.01973.
-add_gpopt(f, xmin, xmax, 200, [], [], options)
+% add_gpopt(f, xmin, xmax, 200, [], [], options)
