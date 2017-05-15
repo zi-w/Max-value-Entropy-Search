@@ -60,15 +60,15 @@ In test_functions/, we provide some functionals one can use to test Bayesian opt
 ## Citation
 Please cite our work if you would like to use the code.
 ```
-@article{wang2017maxvalue,
-    author = {Wang, Zi and Jegelka, Stefanie},
-    title = {Max-value Entropy Search for Efficient Bayesian Optimization},
-    journal = {arXiv preprint arXiv:1703.01968},
-    year = {2017},
+@inproceedings{wang2017maxvalue,
+  title={Max-value Entropy Search for Efficient Bayesian Optimization},
+  author={Wang, Zi and Jegelka, Stefanie},
+  booktitle={International Conference on Machine Learning (ICML)},
+  year={2017}
 }
 ```
 ## References
-* Wang, Zi and Jegelka, Stefanie. Max-value Entropy Search for Efficient Bayesian Optimization. arXiv preprint arXiv:1703.01968, 2017.
+* Wang, Zi and Jegelka, Stefanie. Max-value Entropy Search for Efficient Bayesian Optimization. International Conference on Machine Learning (ICML), 2017.
 * Auer, Peter. Using confidence bounds for exploitationexploration tradeoffs. Journal of Machine Learning Research, 3:397–422, 2002.
 * Srinivas, Niranjan, Krause, Andreas, Kakade, Sham M, and Seeger, Matthias. Gaussian process optimization in the bandit setting: No regret and experimental design. In International Conference on Machine Learning (ICML), 2010.
 * Kushner, Harold J. A new method of locating the maximum point of an arbitrary multipeak curve in the presence of noise. Journal of Fluids Engineering, 86(1):97–106, 1964.
@@ -80,5 +80,5 @@ Please cite our work if you would like to use the code.
 * Hennig, Philipp and Schuler, Christian J. Entropy search for information-efficient global optimization. Journal of Machine Learning Research, 13:1809–1837, 2012. http://www.probabilistic-optimization.org/Global.html
 * Jarno Vanhatalo, Jaakko Riihimäki, Jouni Hartikainen, Pasi Jylänki, Ville Tolvanen, Aki Vehtari. GPstuff: Bayesian Modeling with Gaussian Processes. Journal of Machine Learning Research, 14(Apr):1175-1179, 2013.
 * Kandasamy, Kirthevasan, Schneider, Jeff, and Poczos, Barnabas. High dimensional Bayesian optimisation and bandits via additive models. In International Conference on Machine Learning (ICML), 2015.
-* Wang, Zi, Li, Chengtao, Jegelka, Stefanie, and Kohli, Pushmeet. Batched High-dimensional Bayesian Optimization via Structural Kernel Learning. arXiv preprint arXiv:1703.01973, 2017.
+* Wang, Zi, Li, Chengtao, Jegelka, Stefanie, and Kohli, Pushmeet. Batched High-dimensional Bayesian Optimization via Structural Kernel Learning. International Conference on Machine Learning (ICML), 2017.
 * Westervelt, Eric R, Grizzle, Jessy W, Chevallereau, Christine, Choi, Jun Ho, and Morris, Benjamin. Feedback control of dynamic bipedal robot locomotion, volume 28. CRC press, 2007.
