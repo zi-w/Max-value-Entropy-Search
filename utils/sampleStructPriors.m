@@ -93,7 +93,6 @@ minnlz_nocon = realmax;
 %% start gibbs iteration
 for i = 1:N_gibbs
     for d = 1:dx
-        
         if i < gibbs_iter % in the first two iterations, no limit
             log_prob = zeros(1, n_partition);
             nlz = zeros(1, n_partition);

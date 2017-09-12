@@ -60,11 +60,11 @@ In test_functions/, we provide some functionals one can use to test Bayesian opt
 ## Citation
 Please cite our work if you would like to use the code.
 ```
-@article{wang2017maxvalue,
-    author = {Wang, Zi and Jegelka, Stefanie},
-    title = {Max-value Entropy Search for Efficient Bayesian Optimization},
-    journal = {arXiv preprint arXiv:1703.01968},
-    year = {2017},
+@inproceedings{wang2017maxvalue,
+  title={Max-value Entropy Search for Efficient Bayesian Optimization},
+  author={Wang, Zi and Jegelka, Stefanie},
+  booktitle={International Conference on Machine Learning (ICML)},
+  year={2017}
 }
 ```
 ## References
