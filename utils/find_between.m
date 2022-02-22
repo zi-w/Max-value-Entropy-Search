@@ -29,8 +29,8 @@ while abs(midval - val) > thres
     mid = (left + right) / 2;
     midval = func(mid);
     cnt = cnt + 1;
-    if cnt > 10000
-        keyboard;
-    end
+    % if cnt > 10000
+    %    keyboard;
+    % end
 end
 res = mid;
